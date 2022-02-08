@@ -132,6 +132,7 @@ const getRenderer = (
 const Markdown = React.memo(
   ({
     children,
+    matchers = {},
     renderer = null,
     rules = null,
     style = null,
@@ -182,7 +183,7 @@ const Markdown = React.memo(
 
     const momoizedParser = useMemo(() => markdownit, [markdownit]);
 
-    return parser(children, momoizedRenderer.render, momoizedParser);
+    return parser(children, momoizedRenderer.render, momoizedParser, matchers);
   },
 );
 

@@ -9,16 +9,17 @@ import omitListItemParagraph from './util/omitListItemParagraph';
  * @param {string} source
  * @param {function} [renderer]
  * @param {AstRenderer} [markdownIt]
+ * @param {Matchers} matchers
  * @return {View}
  */
-export default function parser(source, renderer, markdownIt) {
+export default function parser(source, renderer, markdownIt, matchers) {
   if (Array.isArray(source)) {
     return renderer(source);
   }
 
   let tokens = stringToTokens(source, markdownIt);
   tokens = cleanupTokens(tokens);
-  tokens = groupTextTokens(tokens);
+  tokens = groupTextTokens(tokens, matchers);
   tokens = omitListItemParagraph(tokens);
 
   const astTree = tokensToAST(tokens);

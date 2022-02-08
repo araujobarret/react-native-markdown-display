@@ -9,6 +9,13 @@ export function openUrl(url: string): void;
 
 export function hasParents(parents: any[], type: string): boolean;
 
+type Matchers = {
+  [key: string]: {
+    closingTag: string;
+    type: string;
+  }
+}
+
 export type RenderFunction = (
   node: ASTNode,
   children: ReactNode[],
@@ -72,6 +79,7 @@ export function parser(
   source: string,
   renderer: (node: ASTNode) => View,
   parser: MarkdownParser,
+  matchers: Matchers,
 ): any;
 
 export function stringToTokens(
